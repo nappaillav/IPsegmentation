@@ -1,0 +1,35 @@
+# The program to run
+program: main.py
+
+# Method can be grid, random or bayes
+method: random
+
+# Project this sweep is part of
+project: IPSegmentation_debug
+entity: test
+
+# Metric to optimize
+metric:
+  name: val/total_loss
+  goal: minimize
+
+# Parameters space to search
+parameters:
+  IOU_loss:
+    value: False
+  lr_max:
+    distribution: log_uniform_values
+    min: 1e-5
+    max: 1e-3
+  L2:
+    distribution: log_uniform_values
+    min: 1e-5
+    max: 1e-3
+  batch_size:
+    values: [4, 8]
+  enc_model:
+    values:
+      - 'resnet18'
+      - 'resnet34'
+      - 'resnet50'
+      - 'mobilenet-v2'
